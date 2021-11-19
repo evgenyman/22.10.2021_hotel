@@ -13,6 +13,22 @@ public class Hotel {
         System.out.println(result);
     }
 
+    public void getFreeRooms(boolean wc, int sleepingPlace, boolean conditioner, boolean wifi, int seviceCount){
+        String result = "По данному запросу найдены комнаты: ";
+        for (int i = 0; i < rooms.length; i++) {
+            Room room = rooms[i];
+            int mark = 0;
+            if (wc && room.isWc()) mark++;
+            if (sleepingPlace != 0 && room.getSleepingPlace() == sleepingPlace) mark++;
+            if (conditioner && room.isConditioner()) mark++;
+            if (wifi && room.isWifi()) mark++;
+            if(seviceCount == mark && !room.isReserved()){
+                result += room.getRoomNumber()+", ";
+            }
+        }
+        System.out.println(result);
+    }
+
     public void reserve (int roomNumber) {  // создали метод, который на вход принимает int roomNumber. Будем его использовать в Main.java
         String result = "Ошибка! Номера не существуе.";
         for (int i = 0; i < rooms.length; i++) {
